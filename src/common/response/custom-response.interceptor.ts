@@ -4,13 +4,12 @@ import { Observable, map } from 'rxjs';
 @Injectable()
 export class CustomResponseInterceptor implements NestInterceptor {
   intercept(context: any, next: CallHandler): Observable<any> {
-    const method = context.args[0].method;
     return next.handle().pipe(
       map((data: any) => {
-        if (data?.status >= 400) return data?.response;
+        if (data?.status >= 400) return { ...data?.response, isSuccess: false };
         return {
           isSuccess: true,
-          statusCode: method === 'POST' ? 201 : 200,
+          statusCode: 200,
           data: data,
         };
       }),

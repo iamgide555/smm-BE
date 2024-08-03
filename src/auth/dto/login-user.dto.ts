@@ -23,5 +23,5 @@ export class LoginUserDto implements LoginUser {
     type: String,
   })
   @IsNotEmpty()
-  public phoneNumber: string;
+  public phoneNumber!: string;
 }

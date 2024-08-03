@@ -6,10 +6,11 @@ import { AuthService } from '../auth.service';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
-    super({ usernameField: 'phoneNumber' });
+    super({ usernameField: 'phoneNumber', passwordField: 'phoneNumber' });
   }
 
-  async validate(phoneNumber: string): Promise<any> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async validate(phoneNumber: string, _password: string): Promise<any> {
     const user = await this.authService.validateUser(phoneNumber);
     if (!user) {
       throw new UnauthorizedException();

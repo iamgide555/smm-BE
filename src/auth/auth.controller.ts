@@ -19,7 +19,7 @@ import { UserDto } from './dto/user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { CustomResponseInterceptor } from 'src/common/response/custom-response.interceptor';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-// import { LocalAuthGuard } from './guards/local-auth.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @ApiTags('Auth')
 @ApiBearerAuth('defaultBearerAuth')
@@ -38,7 +38,7 @@ export class AuthController {
   }
 
   @Post('login')
-  // @UseGuards(LocalAuthGuard)
+  @UseGuards(LocalAuthGuard)
   @ApiOperation({ summary: 'Login', description: 'Login method' })
   @ApiResponse({ status: 201, description: 'User successfully login' })
   @UseInterceptors(CustomResponseInterceptor)
