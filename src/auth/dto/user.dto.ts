@@ -3,6 +3,7 @@ import { User } from '../interface/user.interface';
 import { ObjectId } from 'mongodb';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
+import { Gender } from '../../common/enum/gender.enum';
 
 @Exclude()
 export class UserDto implements User {
@@ -36,11 +37,11 @@ export class UserDto implements User {
 
   @Expose()
   @ApiProperty({
-    description: 'Gender of User',
+    description: 'Gender of User(M,F,O)',
     example: 'M',
   })
   @IsNotEmpty()
-  public gender!: string;
+  public gender!: Gender;
 
   @Expose()
   @ApiProperty({
